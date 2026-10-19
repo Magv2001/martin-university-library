@@ -1,5 +1,4 @@
 import Image from "next/image"
-import { Button } from "./ui/button"
 import BookCover from "./BookCover"
 import BorrowBook from "./BorrowBook"
 import { db } from "@/database/drizzle";
@@ -29,10 +28,11 @@ const BookOverview = async ({
         .limit(1);
 
     const borrowingEligibility = {
-        isEligible: availableCopies > 0 && user.status === "APPROVED",
-        message: availableCopies <= 0 
-            ? "Book is not available"
-            : "You are not eligible to borrow this book",
+        isEligible: availableCopies > 0 && user?.status === "APPROVED",
+        message: 
+            availableCopies <= 0 
+                ? "Book is not available"
+                : "You are not eligible to borrow this book",
     };
     return (
         <section className="book-overview">
@@ -67,11 +67,13 @@ const BookOverview = async ({
 
                 <p className="book-description">{description}</p>
 
-                {user && <BorrowBook 
-                    bookId={id} 
-                    userId={userId} 
-                    borrowingEligibility={borrowingEligibility}
-                />}
+                {user && 
+                    <BorrowBook 
+                        bookId={id} 
+                        userId={userId} 
+                        borrowingEligibility={borrowingEligibility}
+                    />
+                }
             </div>
 
             <div className="relative flex flex-1 justify-center">
