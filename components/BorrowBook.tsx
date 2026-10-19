@@ -27,6 +27,7 @@ const BorrowBook = ({ userId, bookId, borrowingEligibility: { isEligible, messag
                 description: message,
                 variant: "destructive",
             });
+            return;
         }
 
         setBorrowing(true)
